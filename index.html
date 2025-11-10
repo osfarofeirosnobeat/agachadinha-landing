@@ -19,7 +19,16 @@
     fbq('track', 'PageView');
   </script>
   <!-- Fim Meta Pixel -->
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const botao = document.querySelector('.btn'); // ou altere para a classe real do botão
+  if (botao) {
+    botao.addEventListener('click', function() {
+      fbq('track', 'ClickSpotify', {button_name: 'Ouvir no Spotify'});
+    });
+  }
+});
+</script>
   <style>
     body {
       background: linear-gradient(180deg, #000, #111);
