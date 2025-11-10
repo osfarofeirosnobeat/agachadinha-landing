@@ -18,38 +18,33 @@
     fbq('init', '1374240367427879');
     fbq('track', 'PageView');
   </script>
-  <!-- Fim Meta Pixel --> <script>
- <!-- Fim Meta Pixel -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // seleciona o botão pelo nome da classe
-  var botaoSpotify = document.querySelector('.button');
+  <!-- Fim Meta Pixel -->
 
-  if (botaoSpotify) {
-    botaoSpotify.addEventListener('click', function() {
-      fbq('trackCustom', 'ClickSpotify', {
-        button_name: 'Ouvir no Spotify',
-        origem: 'Landing Agachadinha'
-      });
-      console.log('Evento ClickSpotify disparado!');
+  <!-- Script único para rastrear clique no botão Spotify -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        // tenta achar pelo seletor de classe, depois pelo link do spotify (fallback)
+        var botaoSpotify = document.querySelector('.button') || document.querySelector('a[href*="spotify.com"]');
+
+        if (botaoSpotify && typeof fbq === 'function') {
+          botaoSpotify.addEventListener('click', function() {
+            // evento customizado para Meta
+            fbq('trackCustom', 'ClickSpotify', {
+              button_name: 'Ouvir no Spotify',
+              origem: 'Landing Agachadinha'
+            });
+            console.log('Evento ClickSpotify disparado!');
+          });
+        } else {
+          console.log('Botão Spotify não encontrado ou fbq não definido');
+        }
+      } catch (e) {
+        console.error('Erro no script de rastreio:', e);
+      }
     });
-  } else {
-    console.log('Botão Spotify não encontrado');
-  }
-});
-</script>
+  </script>
 
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const botao = document.querySelector('#spotify-btn'); // ou altere para a classe real do botão
-  if (botao) {
-    botao.addEventListener('click', function() {
-      fbq('track', 'ClickSpotify', {button_name: 'Ouvir no Spotify'});
-    });
-  }
-});
-</script>
   <style>
     body {
       background: linear-gradient(180deg, #000, #111);
@@ -62,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
       font-size: 26px;
       margin-bottom: 30px;
     }
-    a {
+    a.button {
       display: block;
       margin: 20px auto;
       padding: 15px 25px;
@@ -73,15 +68,17 @@ document.addEventListener('DOMContentLoaded', function() {
       border-radius: 10px;
       width: 220px;
       transition: 0.3s;
+      text-align: center;
     }
-    a:hover {
+    a.button:hover {
       background: #17a74a;
     }
   </style>
 </head>
 <body>
   <h1>🎧 Ouça agora "Agachadinha" no Spotify!</h1>
-  <a href="https://open.spotify.com/intl-pt/track/1k67gTi77kaLfORupcg3L5?si=541d80f364714f6e">
+  <!-- adicionei class="button" para o script encontrar o elemento -->
+  <a class="button" href="https://open.spotify.com/intl-pt/track/1k67gTi77kaLfORupcg3L5?si=541d80f364714f6e" target="_blank" rel="noopener noreferrer">
     Ouvir no Spotify
   </a>
 </body>
