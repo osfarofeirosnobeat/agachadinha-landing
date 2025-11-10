@@ -18,7 +18,20 @@
     fbq('init', '1374240367427879');
     fbq('track', 'PageView');
   </script>
-  <!-- Fim Meta Pixel -->
+  <!-- Fim Meta Pixel --> <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var botaoSpotify = document.querySelector('.button');
+    if (botaoSpotify) {
+      botaoSpotify.addEventListener('click', function() {
+        fbq('trackCustom', 'ClickSpotify', {
+          nome_botao: 'Ouvir no Spotify',
+          origem: 'Landing Agachadinha'
+        });
+      });
+    }
+  });
+</script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const botao = document.querySelector('#spotify-btn'); // ou altere para a classe real do botão
