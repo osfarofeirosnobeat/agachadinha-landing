@@ -19,18 +19,26 @@
     fbq('track', 'PageView');
   </script>
   <!-- Fim Meta Pixel --> <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var botaoSpotify = document.querySelector('.button');
-    if (botaoSpotify) {
-      botaoSpotify.addEventListener('click', function() {
-        fbq('trackCustom', 'ClickSpotify', {
-          nome_botao: 'Ouvir no Spotify',
-          origem: 'Landing Agachadinha'
-        });
+ <!-- Fim Meta Pixel -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // seleciona o botão pelo nome da classe
+  var botaoSpotify = document.querySelector('.button');
+
+  if (botaoSpotify) {
+    botaoSpotify.addEventListener('click', function() {
+      fbq('trackCustom', 'ClickSpotify', {
+        button_name: 'Ouvir no Spotify',
+        origem: 'Landing Agachadinha'
       });
-    }
-  });
+      console.log('Evento ClickSpotify disparado!');
+    });
+  } else {
+    console.log('Botão Spotify não encontrado');
+  }
+});
 </script>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
