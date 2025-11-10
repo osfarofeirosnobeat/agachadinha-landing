@@ -21,7 +21,7 @@
   <!-- Fim Meta Pixel -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const botao = document.querySelector('.btn'); // ou altere para a classe real do botão
+  const botao = document.querySelector('#spotify-btn'); // ou altere para a classe real do botão
   if (botao) {
     botao.addEventListener('click', function() {
       fbq('track', 'ClickSpotify', {button_name: 'Ouvir no Spotify'});
